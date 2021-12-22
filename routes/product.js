@@ -1,7 +1,8 @@
-
+ 
 const Product = require('../moduels/Product');
 const { verifyToken ,verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('./verify')
 const router = require ('express').Router();
+
 
 //ADD Product
 router.post("/", verifyTokenAndAdmin,async(req,res)=>{
