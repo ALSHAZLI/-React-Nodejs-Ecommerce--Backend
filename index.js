@@ -4,9 +4,7 @@ const app = express();
 // using cors to allowd just react app url 
 //so i avoid a bug or sercurity issus hear 
 // iknow i Know im boss 
-app.use(cors({
-    origin: 'http://localhost:3000'
-}));
+app.use(cors());
 const mongoose = require ('mongoose')
 const dotenv = require ('dotenv')
 const userRoute = require('./routes/users')
@@ -14,6 +12,7 @@ const authRoute = require('./routes/auth')
 const productRoute = require('./routes/product')
 const cartRoute = require('./routes/cart')
 const orderRoute = require('./routes/order')
+const stripCheck = require('./routes/stripe')
 
 
 
@@ -34,6 +33,7 @@ app.use("/api/users", userRoute);
 app.use("/api/products", productRoute); 
 app.use("/api/carts", cartRoute); 
 app.use("/api/orders", orderRoute); 
+app.use("/api/checkout",stripCheck)
 
 
 

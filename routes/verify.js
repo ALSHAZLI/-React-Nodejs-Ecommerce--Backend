@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-
+const Product = require("../moduels/Product");
 //    verifyToken, thats mean eny user
 
 const verifyToken = (req, res, next) => {
@@ -41,6 +41,25 @@ const verifyTokenAndAdmin = (req, res, next) => {
       }
     });
   };
+
+  const  upPrice =async (req, res,next) =>{
+    try {
+      const updatedProduct = await Product.update(
+        req.params.id,
+        {
+          $set: {
+            price: 6,
+          },
+        },
+        { multi: true }
+      );
+      res.status(200).json(updatedProduct);
+      next();
+    } catch (err) {
+      res.status(500).json(err);
+      console.log(err);
+    }
+  }
 //    verifyToken, thats mean eny user
 // verifyTokenAndAuthorization only users,
 //  verifyTokenAndAdmin only admins
@@ -48,5 +67,6 @@ const verifyTokenAndAdmin = (req, res, next) => {
 module.exports = {
     verifyToken,
     verifyTokenAndAuthorization,
-    verifyTokenAndAdmin
+    verifyTokenAndAdmin,
+    upPrice
   };
